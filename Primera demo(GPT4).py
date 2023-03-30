@@ -4,7 +4,7 @@ from tkinter import messagebox
 openai.api_key = "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"
 
 #Estoy en la rama secundaria
-#Estoy en la rama master
+
 
 def generar_nota_periodistica_2(tipo, datos, angulo, fuente, descargo, testimonios, rango_caracteres,contexto):
     response=openai.ChatCompletion.create(
