@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Notas Periodísticas</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Generador de Notas Periodísticas</h1>
+    <form id="form">
+        <label for="tipo">Tipo de redacción:</label>
+        <select id="tipo" name="tipo">
+            <option value="Noticia">Noticia</option>
+            <option value="Reportaje">Reportaje</option>
+            <option value="Crónica">Crónica</option>
+            <option value="Entrevista">Entrevista</option>
+            <option value="Columna de opinión">Columna de opinión</option>
+            <option value="Editorial">Editorial</option>
+            <option value="Reseña o Crítica">Reseña o Crítica</option>
+        </select><br><br>
+
+        <label for="datos">Datos:</label>
+        <input type="text" id="datos" name="datos"><br><br>
+
+        <label for="angulo">Ángulo:</label>
+        <input type="text" id="angulo" name="angulo"><br><br>
+
+        <label for="fuente">Fuente:</label>
+        <input type="text" id="fuente" name="fuente"><br><br>
+
+        <label for="descargo">Descargo:</label>
+        <input type="text" id="descargo" name="descargo"><br><br>
+
+        <label for="testimonios">Testimonios:</label>
+        <input type="text" id="testimonios" name="testimonios"><br><br>
+        <label for="rango_caracteres">Rango de caracteres:</label>
+    <input type="text" id="rango_caracteres" name="rango_caracteres"><br><br>
+
+    <label for="contexto">Contexto:</label>
+    <input type="text" id="contexto" name="contexto"><br><br>
+
+    <button type="button" id="submit">Generar nota periodística</button>
+</form>
+
+<div id="resultado"></div>
+
+<script>
+    $(document).ready(function() {
+        $("#submit").click(function() {
+            let data = {
+                tipo: $("#tipo").val(),
+                datos: $("#datos").val(),
+                angulo: $("#angulo").val(),
+                fuente: $("#fuente").val(),
+                descargo: $("#descargo").val(),
+                testimonios: $("#testimonios").val(),
+                rango_caracteres: $("#rango_caracteres").val(),
+                contexto: $("#contexto").val()
+            };
+
+            $.ajax({
+                url: '/generate',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function(response) {
+                    $("#resultado").html("<h2>Resultado:</h2><p>" + response + "</p>");
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+```
